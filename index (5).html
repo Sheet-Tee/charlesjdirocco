@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chuck DiRocco | Research Executive & Economist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold:      #C4A44A;
+    --gold-dim:  #8A6F30;
+    --white:     #FFFFFF;
+    --off-white: #F0F0F0;
+    --grey-1:    #E0E0E0;
+    --grey-2:    #A0A0A0;
+    --grey-3:    #606060;
+    --charcoal:  #1E1E1E;
+    --charcoal2: #252525;
+    --charcoal3: #2E2E2E;
+    --rule:      rgba(196,164,74,0.2);
+    --rule-w:    rgba(255,255,255,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--charcoal);
+    color: var(--off-white);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5rem;
+    background: rgba(30,30,30,0.96);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--rule-w);
+  }
+  .nav-logo {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey-2);
+    text-decoration: none;
+    transition: color 0.2s;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .nav-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    background: var(--gold);
+    padding: 0.55rem 1.2rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: #d4b45a; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 64px;
+  }
+
+  /* Left: Photo */
+  .hero-photo-side {
+    position: relative;
+    overflow: hidden;
+    background: var(--charcoal2);
+  }
+  .hero-photo-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+    display: block;
+    filter: grayscale(20%) contrast(1.05);
+  }
+  .hero-photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent 60%, var(--charcoal) 100%),
+                linear-gradient(to top, var(--charcoal) 0%, transparent 20%);
+  }
+  .hero-photo-tag {
+    position: absolute;
+    bottom: 2rem; left: 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .hero-photo-tag::before {
+    content: '';
+    display: block;
+    width: 24px; height: 1px;
+    background: var(--gold);
+  }
+
+  /* Right: Animated content */
+  .hero-content-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 5rem 4rem 4rem;
+    position: relative;
+  }
+
+  .hero-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hero-name::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 4.5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .hero-title em { font-style: italic; color: var(--gold); font-weight: 400; }
+
+  /* Rotating panel */
+  .hero-rotator {
+    margin: 2.5rem 0;
+    height: 140px;
+    position: relative;
+    overflow: hidden;
+    border-left: 2px solid var(--gold);
+    padding-left: 1.5rem;
+  }
+  .rotator-slide {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    padding-left: 1.5rem;
+  }
+  .rotator-slide.active { opacity: 1; transform: translateY(0); }
+  .rotator-slide.exit { opacity: 0; transform: translateY(-16px); }
+  .slide-stat {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .slide-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--grey-1);
+    line-height: 1.5;
+    max-width: 320px;
+  }
+  .slide-label strong { color: var(--white); font-weight: 600; }
+
+  /* Rotator dots */
+  .rotator-dots {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    padding-left: 0;
+  }
+  .rdot {
+    width: 20px; height: 2px;
+    background: var(--grey-3);
+    cursor: pointer;
+    transition: background 0.2s, width 0.3s;
+  }
+  .rdot.active { background: var(--gold); width: 36px; }
+
+  .hero-designations {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .desig {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--grey-2);
+    border: 1px solid var(--rule-w);
+    padding: 0.3rem 0.75rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .desig:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-actions { display: flex; gap: 1rem; }
+  .btn-gold {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--charcoal);
+    padding: 0.9rem 1.8rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-gold:hover { background: #d4b45a; transform: translateY(-1px); }
+  .btn-outline {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--grey-1);
+    padding: 0.9rem 1.8rem;
+    text-decoration: none;
+    border: 1px solid var(--rule-w);
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── TICKER BAR ── */
+  .ticker {
+    background: var(--gold);
+    padding: 0.7rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-flex;
+    gap: 0;
+    animation: ticker 30s linear infinite;
+  }
+  .ticker-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    font-weight: 500;
+    padding: 0 3rem;
+  }
+  .ticker-item::before { content: '◆'; margin-right: 3rem; opacity: 0.5; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 5rem; }
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+  }
+  .section-line { flex: 0 0 32px; height: 1px; background: var(--gold); }
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey-3);
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 3.5rem;
+  }
+  h2 em { font-style: italic; color: var(--gold); font-weight: 400; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--charcoal2); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 6rem; align-items: start; }
+  .about-body p { font-size: 1rem; line-height: 1.85; color: var(--grey-1); margin-bottom: 1.4rem; }
+  .about-body p strong { color: var(--white); font-weight: 600; }
+
+  .expertise-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--rule-w);
+    margin-top: 3rem;
+  }
+  .exp-item {
+    padding: 0.9rem 1.2rem;
+    border-bottom: 1px solid var(--rule-w);
+    border-right: 1px solid var(--rule-w);
+    font-size: 0.78rem;
+    color: var(--grey-2);
+    display: flex; align-items: center; gap: 0.6rem;
+    transition: background 0.2s, color 0.2s;
+  }
+  .exp-item:hover { background: rgba(196,164,74,0.06); color: var(--gold); }
+  .exp-item:nth-child(2n) { border-right: none; }
+  .exp-item:nth-last-child(-n+2) { border-bottom: none; }
+  .exp-dot { width: 3px; height: 3px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+  .timeline { margin-top: 4rem; border-top: 1px solid var(--rule-w); }
+  .tl-item {
+    display: grid; grid-template-columns: 140px 1fr;
+    gap: 2rem; padding: 1.6rem 0;
+    border-bottom: 1px solid var(--rule-w);
+    transition: background 0.15s;
+    cursor: default;
+  }
+  .tl-item:hover { background: rgba(255,255,255,0.02); }
+  .tl-org { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.2rem; }
+  .tl-dates { font-family: 'DM Mono', monospace; font-size: 0.56rem; color: var(--grey-3); }
+  .tl-role { font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 500; color: var(--white); margin-bottom: 0.35rem; }
+  .tl-desc { font-size: 0.82rem; color: var(--grey-2); line-height: 1.6; }
+
+  /* ── SPEAKING ── */
+  #speaking { background: var(--charcoal); }
+  .speaking-intro { max-width: 680px; font-size: 1rem; color: var(--grey-2); line-height: 1.8; margin-bottom: 4rem; }
+
+  .photo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--rule-w); margin-bottom: 4rem; }
+  .photo-card {
+    aspect-ratio: 4/3; position: relative; overflow: hidden;
+    background: var(--charcoal3); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; filter: grayscale(20%); }
+  .photo-card:hover img { transform: scale(1.04); }
+  .photo-card-ph { font-family: 'DM Mono', monospace; font-size: 0.55rem; color: var(--grey-3); letter-spacing: 0.1em; }
+  .photo-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(20,20,20,0.88) 0%, transparent 55%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 1.2rem; opacity: 0; transition: opacity 0.3s;
+  }
+  .photo-card:hover .photo-card-overlay { opacity: 1; }
+  .pc-venue { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.25rem; }
+  .pc-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--white); line-height: 1.3; }
+
+  .topic-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; background: var(--rule-w); }
+  .topic-card {
+    background: var(--charcoal2); padding: 2rem 2.2rem;
+    transition: background 0.2s;
+  }
+  .topic-card:hover { background: var(--charcoal3); }
+  .topic-num { font-family: 'DM Mono', monospace; font-size: 0.56rem; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 0.7rem; }
+  .topic-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--white); margin-bottom: 0.5rem; line-height: 1.3; }
+  .topic-desc { font-size: 0.82rem; color: var(--grey-2); line-height: 1.65; }
+
+  /* ── VIDEO ── */
+  #video { background: var(--charcoal2); }
+  .video-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 2px; background: var(--rule-w); }
+  .video-main {
+    aspect-ratio: 16/9; background: var(--charcoal3);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; cursor: pointer;
+  }
+  .play-btn {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(196,164,74,0.15);
+    border: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 2;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .video-main:hover .play-btn { background: rgba(196,164,74,0.3); transform: scale(1.08); }
+  .play-btn::after {
+    content: ''; border-width: 7px 0 7px 14px; border-style: solid;
+    border-color: transparent transparent transparent var(--gold);
+    margin-left: 4px;
+  }
+  .video-label { position: absolute; bottom: 1rem; left: 1.2rem; font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey-2); }
+  .video-sidebar { display: flex; flex-direction: column; }
+  .vthumb {
+    display: flex; gap: 1rem; align-items: center;
+    padding: 1rem 1.2rem; border-bottom: 1px solid var(--rule-w);
+    background: var(--charcoal2); cursor: pointer; transition: background 0.2s;
+  }
+  .vthumb:last-child { border-bottom: none; }
+  .vthumb:hover { background: var(--charcoal3); }
+  .vthumb-img {
+    width: 80px; height: 48px; flex-shrink: 0;
+    background: var(--charcoal3); border: 1px solid var(--rule-w);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .play-sm::after { content: ''; border-width: 4px 0 4px 8px; border-style: solid; border-color: transparent transparent transparent var(--grey-3); }
+  .vthumb-tag { font-family: 'DM Mono', monospace; font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.2rem; }
+  .vthumb-title { font-size: 0.85rem; color: var(--grey-1); line-height: 1.3; font-weight: 400; }
+
+  /* ── PUBLICATIONS ── */
+  #publications { background: var(--charcoal); }
+  .pub-filter { display: flex; gap: 0.4rem; margin-bottom: 3rem; flex-wrap: wrap; }
+  .filter-btn {
+    font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.45rem 1rem; background: transparent; border: 1px solid var(--rule-w);
+    color: var(--grey-3); cursor: pointer; transition: all 0.2s;
+  }
+  .filter-btn.active, .filter-btn:hover { background: var(--gold); color: var(--charcoal); border-color: var(--gold); font-weight: 500; }
+  .pub-list { display: flex; flex-direction: column; border-top: 1px solid var(--rule-w); }
+  .pub-item {
+    display: grid; grid-template-columns: 100px 1fr auto;
+    gap: 2rem; align-items: center;
+    padding: 1.5rem 0; border-bottom: 1px solid var(--rule-w);
+    cursor: pointer; transition: background 0.15s, padding 0.15s;
+    text-decoration: none;
+  }
+  .pub-item:hover { background: rgba(196,164,74,0.04); padding-left: 0.8rem; padding-right: 0.8rem; }
+  .pub-year { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--gold); letter-spacing: 0.08em; }
+  .pub-source { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-3); margin-bottom: 0.3rem; }
+  .pub-title-text { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--white); line-height: 1.3; }
+  .pub-type { font-family: 'DM Mono', monospace; font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-3); border: 1px solid var(--rule-w); padding: 0.28rem 0.65rem; white-space: nowrap; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--charcoal2); display: grid; grid-template-columns: 1fr 1fr; padding: 0; }
+  .contact-left { padding: 7rem 4rem 7rem 5rem; border-right: 1px solid var(--rule-w); }
+  .contact-right { padding: 7rem 5rem 7rem 4rem; }
+  .contact-left h2 { color: var(--white); margin-bottom: 1.5rem; }
+  .contact-desc { font-size: 0.95rem; color: var(--grey-2); line-height: 1.8; margin-bottom: 2.5rem; }
+  .contact-list { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 3rem; }
+  .contact-list-item { display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; color: var(--grey-2); }
+  .contact-list-item::before { content: ''; width: 4px; height: 4px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+  .contact-detail { display: flex; flex-direction: column; gap: 0.15rem; margin-bottom: 1.2rem; }
+  .contact-detail-label { font-family: 'DM Mono', monospace; font-size: 0.52rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+  .contact-detail-value { font-size: 0.9rem; color: var(--white); text-decoration: none; }
+  .contact-detail-value:hover { color: var(--gold); }
+  .form-heading { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--white); margin-bottom: 2rem; }
+  .form-group { margin-bottom: 1.3rem; }
+  .form-label { display: block; font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--grey-3); margin-bottom: 0.45rem; }
+  .form-input, .form-textarea {
+    width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--rule-w);
+    color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.9rem;
+    padding: 0.8rem 1rem; outline: none; transition: border-color 0.2s;
+  }
+  .form-input::placeholder, .form-textarea::placeholder { color: var(--grey-3); }
+  .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
+  .form-textarea { min-height: 110px; resize: vertical; }
+  .form-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.3rem; }
+  .chip {
+    font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.08em; text-transform: uppercase;
+    border: 1px solid var(--rule-w); color: var(--grey-3); padding: 0.38rem 0.85rem;
+    cursor: pointer; transition: all 0.2s; user-select: none;
+  }
+  .chip.on { background: var(--gold); color: var(--charcoal); border-color: var(--gold); font-weight: 500; }
+  .btn-submit {
+    width: 100%; background: var(--gold); color: var(--charcoal);
+    font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.13em; text-transform: uppercase;
+    padding: 1rem; border: none; cursor: pointer; font-weight: 500;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-submit:hover { background: #d4b45a; transform: translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #161616; border-top: 1px solid var(--rule-w);
+    padding: 2rem 5rem; display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-name { font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 500; color: var(--grey-2); letter-spacing: 0.05em; }
+  .footer-desigs { font-family: 'DM Mono', monospace; font-size: 0.52rem; color: var(--grey-3); letter-spacing: 0.1em; }
+  .footer-copy { font-family: 'DM Mono', monospace; font-size: 0.5rem; color: var(--grey-3); opacity: 0.5; letter-spacing: 0.08em; }
+
+  /* ── REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.32s; } .d4 { transition-delay: 0.45s; }
+
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--charcoal); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links, .nav-cta { display: none; }
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-photo-side { height: 50vw; }
+    .hero-content-side { padding: 2.5rem 1.5rem; }
+    .hero-rotator { height: 120px; }
+    .slide-stat { font-size: 2.5rem; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .photo-grid { grid-template-columns: 1fr; }
+    .topic-grid { grid-template-columns: 1fr; }
+    .video-grid { grid-template-columns: 1fr; }
+    #contact { grid-template-columns: 1fr; }
+    .contact-left, .contact-right { padding: 4rem 1.5rem; }
+    .pub-item { grid-template-columns: 80px 1fr; }
+    .pub-type { display: none; }
+    footer { flex-direction: column; gap: 0.6rem; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#">Chuck <span>DiRocco</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#speaking">Speaking</a></li>
+    <li><a href="#video">Video</a></li>
+    <li><a href="#publications">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-photo-side">
+    <img src="images/headshot.png" alt="Chuck DiRocco">
+    <div class="hero-photo-overlay"></div>
+    <div class="hero-photo-tag">Denver, Colorado</div>
+  </div>
+  <div class="hero-content-side">
+    <div class="hero-name reveal">Charles J. DiRocco</div>
+    <h1 class="hero-title reveal d1">Research<br><em>Executive</em><br>& Economist</h1>
+
+    <div class="hero-rotator reveal d2">
+      <div class="rotator-slide active">
+        <div class="slide-stat">25+</div>
+        <div class="slide-label">Years building <strong>institutional research programs</strong> at the intersection of economic analysis and investor communication.</div>
+      </div>
+      <div class="rotator-slide">
+        <div class="slide-stat">#1</div>
+        <div class="slide-label">Co-creator of the globally adopted benchmark for REIT investment — the <strong>FTSE/EPRA/NAREIT Global Real Estate Index</strong>, now licensed throughout the industry worldwide.</div>
+      </div>
+      <div class="rotator-slide">
+        <div class="slide-stat">12+</div>
+        <div class="slide-label">Years leading <strong>Emerging Trends in Real Estate®</strong> — PwC's #2 most-clicked global publication.</div>
+      </div>
+      <div class="rotator-slide">
+        <div class="slide-stat">100+</div>
+        <div class="slide-label">Keynotes and panels at national conferences — translating complex economic data into decisions for <strong>institutional audiences</strong>.</div>
+      </div>
+    </div>
+
+    <div class="rotator-dots reveal d2">
+      <div class="rdot active" onclick="goSlide(0)"></div>
+      <div class="rdot" onclick="goSlide(1)"></div>
+      <div class="rdot" onclick="goSlide(2)"></div>
+      <div class="rdot" onclick="goSlide(3)"></div>
+    </div>
+
+    <div class="hero-designations reveal d3">
+      <span class="desig">CRE</span>
+      <span class="desig">CCIM</span>
+      <span class="desig">FRICS</span>
+      <span class="desig">MBA · Finance</span>
+      <span class="desig">Johns Hopkins</span>
+    </div>
+
+    <div class="hero-actions reveal d4">
+      <a href="#contact" class="btn-gold">Inquire About Engagements</a>
+      <a href="#publications" class="btn-outline">View Research</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Research Executive</span>
+    <span class="ticker-item">Economist</span>
+    <span class="ticker-item">Keynote Speaker</span>
+    <span class="ticker-item">Index Architect</span>
+    <span class="ticker-item">Thought Leader</span>
+    <span class="ticker-item">Investor Educator</span>
+    <span class="ticker-item">Financial Markets</span>
+    <span class="ticker-item">Capital Markets</span>
+    <span class="ticker-item">Research Executive</span>
+    <span class="ticker-item">Economist</span>
+    <span class="ticker-item">Keynote Speaker</span>
+    <span class="ticker-item">Index Architect</span>
+    <span class="ticker-item">Thought Leader</span>
+    <span class="ticker-item">Investor Educator</span>
+    <span class="ticker-item">Financial Markets</span>
+    <span class="ticker-item">Capital Markets</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">
+    <span class="section-num">01</span>
+    <div class="section-line"></div>
+    <span class="section-tag">Background</span>
+  </div>
+  <div class="about-grid">
+    <div class="reveal">
+      <h2>Research <em>Executive</em><br>& Economist</h2>
+      <div class="expertise-grid">
+        <div class="exp-item"><span class="exp-dot"></span>Economic & Market Analysis</div>
+        <div class="exp-item"><span class="exp-dot"></span>Thought Leadership Publishing</div>
+        <div class="exp-item"><span class="exp-dot"></span>Investor Education</div>
+        <div class="exp-item"><span class="exp-dot"></span>Index Construction</div>
+        <div class="exp-item"><span class="exp-dot"></span>Keynote Speaking</div>
+        <div class="exp-item"><span class="exp-dot"></span>Survey Research</div>
+        <div class="exp-item"><span class="exp-dot"></span>Team & Budget Leadership</div>
+        <div class="exp-item"><span class="exp-dot"></span>Media Spokesperson</div>
+        <div class="exp-item"><span class="exp-dot"></span>Capital Markets</div>
+        <div class="exp-item"><span class="exp-dot"></span>Portfolio Strategy</div>
+      </div>
+    </div>
+    <div class="about-body reveal d2">
+      <p>I am a <strong>research executive and economist</strong> with a career built at the intersection of rigorous methodology, investor education, and high-visibility communication. My fluency spans macro and microeconomic dynamics — monetary policy, labor markets, inflation, capital flows, and debt and equity market cycles — and how those forces translate into real investment behavior and outcomes.</p>
+      <p>At <strong>PwC</strong>, I lead the full research lifecycle for <em>Emerging Trends in Real Estate®</em>, the firm's #2 most-clicked global publication. As <strong>Managing Director at Ankura</strong>, I led institutional economic research serving investment banks, insurers, and pension fund managers. Earlier at <strong>NAREIT</strong>, I produced the landmark Ibbotson/NAREIT REIT Asset Allocation Study and co-architected the <strong>FTSE/EPRA/NAREIT Global Real Estate Index</strong> — the globally adopted benchmark for institutional real estate allocation.</p>
+      <p>I have published in peer-reviewed journals, contributed to <em>Forbes</em>, and authored original research on <strong>probability markets and asset valuation</strong>. I know how to tailor the same underlying research for a CFO, a financial advisor, and an individual investor.</p>
+      <div class="timeline">
+        <div class="tl-item">
+          <div><div class="tl-org">PwC</div><div class="tl-dates">2022–Present · 2008–2013</div></div>
+          <div><div class="tl-role">Director of Research</div><div class="tl-desc">Leads Emerging Trends in Real Estate® globally. Keynote presenter at major industry conferences annually. AI-integrated analytics and data visualization.</div></div>
+        </div>
+        <div class="tl-item">
+          <div><div class="tl-org">Ankura</div><div class="tl-dates">2019–2022</div></div>
+          <div><div class="tl-role">Managing Director, Research & Insights</div><div class="tl-desc">Led institutional economic research programs serving investment banks, insurers, and pension fund managers.</div></div>
+        </div>
+        <div class="tl-item">
+          <div><div class="tl-org">Altus Group</div><div class="tl-dates">2013–2018</div></div>
+          <div><div class="tl-role">Director of Research</div><div class="tl-desc">Designed Real Confidence Executive Survey and The Yardstick quarterly forecast. Primary media spokesperson.</div></div>
+        </div>
+        <div class="tl-item">
+          <div><div class="tl-org">ULI</div><div class="tl-dates">2006–2008</div></div>
+          <div><div class="tl-role">Managing Director, Industry Trends & Analysis</div><div class="tl-desc">Owned editorial governance of ETRE across three global editions. Redesigned global survey instruments.</div></div>
+        </div>
+        <div class="tl-item">
+          <div><div class="tl-org">NAREIT</div><div class="tl-dates">1995–2005</div></div>
+          <div><div class="tl-role">VP, Research & Investor Education</div><div class="tl-desc">Produced the landmark Ibbotson/NAREIT Asset Allocation Study. Architected the FTSE/EPRA/NAREIT Global Real Estate Index. Led national investor education for Fortune 500 plan sponsors.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEAKING -->
+<section id="speaking">
+  <div class="section-label">
+    <span class="section-num">02</span>
+    <div class="section-line"></div>
+    <span class="section-tag">Speaking & Engagements</span>
+  </div>
+  <h2 class="reveal">On Stage &amp; <em>On Camera</em></h2>
+  <p class="speaking-intro reveal d1">A national public speaker with two decades of experience at major industry events. Known for combining rigorous economic analysis with memorable storytelling — from major ULI conference keynotes to boardroom briefings for sovereign wealth fund managers.</p>
+
+  <div class="photo-grid reveal d1">
+    <div class="photo-card">
+      <span class="photo-card-ph">Photo 1</span>
+      <div class="photo-card-overlay"><div class="pc-venue">ULI Fall Meeting</div><div class="pc-title">Emerging Trends in Real Estate® Keynote</div></div>
+    </div>
+    <div class="photo-card">
+      <span class="photo-card-ph">Photo 2</span>
+      <div class="photo-card-overlay"><div class="pc-venue">REITworld</div><div class="pc-title">Capital Markets Outlook & Index Analysis</div></div>
+    </div>
+    <div class="photo-card">
+      <span class="photo-card-ph">Photo 3</span>
+      <div class="photo-card-overlay"><div class="pc-venue">Counselors of Real Estate</div><div class="pc-title">Economic Outlook & Market Trends</div></div>
+    </div>
+  </div>
+
+  <div class="topic-grid reveal">
+    <div class="topic-card">
+      <div class="topic-num">T.01</div>
+      <div class="topic-name">The Economics of Investment Markets</div>
+      <div class="topic-desc">Monetary policy, inflation, labor dynamics, and capital flows — how macro forces shape portfolio decisions and institutional strategy.</div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-num">T.02</div>
+      <div class="topic-name">Emerging Trends in Real Estate®</div>
+      <div class="topic-desc">The definitive annual forecast, translated for institutional investors, wealth managers, and executive audiences.</div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-num">T.03</div>
+      <div class="topic-name">Prediction Markets & Asset Valuation</div>
+      <div class="topic-desc">How crowd-sourced probability signals can sharpen underwriting assumptions and modernize investment decisioning.</div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-num">T.04</div>
+      <div class="topic-name">Investor Education at Scale</div>
+      <div class="topic-desc">Designing research programs that move diverse audiences — from 401(k) plan sponsors to sovereign wealth fund managers.</div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section id="video">
+  <div class="section-label">
+    <span class="section-num">03</span>
+    <div class="section-line"></div>
+    <span class="section-tag">Video Library</span>
+  </div>
+  <h2 class="reveal">Watch &amp; <em>Listen</em></h2>
+  <div class="video-grid reveal d1">
+    <div class="video-main">
+      <div class="play-btn"></div>
+      <div class="video-label">Featured · ULI Keynote</div>
+    </div>
+    <div class="video-sidebar">
+      <div class="vthumb"><div class="vthumb-img"><div class="play-sm"></div></div><div><div class="vthumb-tag">Panel · 2024</div><div class="vthumb-title">CRE Outlook: Navigating Rate Uncertainty</div></div></div>
+      <div class="vthumb"><div class="vthumb-img"><div class="play-sm"></div></div><div><div class="vthumb-tag">Webinar · CRE</div><div class="vthumb-title">Economic Outlook & Market Trends</div></div></div>
+      <div class="vthumb"><div class="vthumb-img"><div class="play-sm"></div></div><div><div class="vthumb-tag">Interview · Forbes</div><div class="vthumb-title">Infrastructure as a High-Yield Asset Class</div></div></div>
+      <div class="vthumb"><div class="vthumb-img"><div class="play-sm"></div></div><div><div class="vthumb-tag">Keynote · REITworld</div><div class="vthumb-title">Global Real Estate Index: 25 Years On</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-label">
+    <span class="section-num">04</span>
+    <div class="section-line"></div>
+    <span class="section-tag">Research & Publications</span>
+  </div>
+  <h2 class="reveal">Selected <em>Works</em></h2>
+  <div class="pub-filter reveal" id="pubFilter">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="report">Reports</button>
+    <button class="filter-btn" data-filter="article">Articles</button>
+    <button class="filter-btn" data-filter="paper">Papers</button>
+    <button class="filter-btn" data-filter="interview">Interviews</button>
+  </div>
+  <div class="pub-list reveal d1" id="pubList">
+    <div class="pub-item" data-type="paper"><div class="pub-year">2025</div><div><div class="pub-source">PwC</div><div class="pub-title-text">Probability Markets and Commercial Real Estate Valuation</div></div><div class="pub-type">Paper</div></div>
+    <div class="pub-item" data-type="report"><div class="pub-year">2008–2026</div><div><div class="pub-source">PwC / Urban Land Institute</div><div class="pub-title-text">Emerging Trends in Real Estate® — North America, Europe & Asia Pacific (Annual)</div></div><div class="pub-type">Report</div></div>
+    <div class="pub-item" data-type="report"><div class="pub-year">2022</div><div><div class="pub-source">Co-authored — Institutional</div><div class="pub-title-text">Adding Listed Infrastructure to the Mix — Portfolio Diversification Guide for Institutional Investors</div></div><div class="pub-type">Report</div></div>
+    <div class="pub-item" data-type="article"><div class="pub-year">2021</div><div><div class="pub-source">American Bar Association</div><div class="pub-title-text">The Complex Art of Valuing Commercial Real Estate During a Pandemic and Cyclical Downturns</div></div><div class="pub-type">Article</div></div>
+    <div class="pub-item" data-type="article"><div class="pub-year">2017</div><div><div class="pub-source">Forbes</div><div class="pub-title-text">Experts Bet on Infrastructure as One of the Highest-Yield Property Asset Classes</div></div><div class="pub-type">Article</div></div>
+    <div class="pub-item" data-type="paper"><div class="pub-year">2011</div><div><div class="pub-source">American Real Estate Society (ARES)</div><div class="pub-title-text">New Evidence on the Diversification Benefits of Real Estate</div></div><div class="pub-type">Paper</div></div>
+    <div class="pub-item" data-type="paper"><div class="pub-year">2006</div><div><div class="pub-source">Journal of Real Estate Finance and Economics, Vol. 33</div><div class="pub-title-text">Equity Capital Flows and Demand for REITs — Peer-Reviewed Study</div></div><div class="pub-type">Paper</div></div>
+    <div class="pub-item" data-type="paper"><div class="pub-year">2002</div><div><div class="pub-source">Ibbotson Associates / NAREIT</div><div class="pub-title-text">REIT Asset Allocation Study — Landmark Research for Institutional Portfolio Construction</div></div><div class="pub-type">Paper</div></div>
+    <div class="pub-item" data-type="paper"><div class="pub-year">2000</div><div><div class="pub-source">AAII Journal — Co-authored</div><div class="pub-title-text">Investing in Real Estate Investment Trusts — Foundational Guide for Individual Investors</div></div><div class="pub-type">Paper</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-left">
+    <div class="section-label" style="margin-bottom:1rem">
+      <span class="section-num" style="color:var(--gold)">05</span>
+      <div class="section-line"></div>
+      <span class="section-tag">Get in Touch</span>
+    </div>
+    <h2>Let's <em>Connect</em></h2>
+    <p class="contact-desc">Available for speaking engagements, consulting, board advisory, media commentary, and executive collaboration. Based in Denver, CO — available nationally and globally.</p>
+    <div class="contact-list">
+      <div class="contact-list-item">Speaking Engagements & Keynotes</div>
+      <div class="contact-list-item">Research Consulting & Partnerships</div>
+      <div class="contact-list-item">Board & Advisory Roles</div>
+      <div class="contact-list-item">Media & Editorial Commentary</div>
+      <div class="contact-list-item">Executive & Leadership Opportunities</div>
+    </div>
+    <div class="contact-detail"><span class="contact-detail-label">Location</span><span class="contact-detail-value">Denver, Colorado</span></div>
+    <div class="contact-detail"><span class="contact-detail-label">Email</span><a href="mailto:cjdirocco@yahoo.com" class="contact-detail-value">cjdirocco@yahoo.com</a></div>
+    <div class="contact-detail"><span class="contact-detail-label">LinkedIn</span><a href="https://linkedin.com/in/charlesdirocco" class="contact-detail-value">linkedin.com/in/charlesdirocco</a></div>
+  </div>
+  <div class="contact-right">
+    <p class="form-heading">Send a Message</p>
+    <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="Full name"></div>
+    <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="you@organization.com"></div>
+    <div class="form-group">
+      <label class="form-label">I'm Interested In</label>
+      <div class="form-chips">
+        <span class="chip" onclick="this.classList.toggle('on')">Speaking</span>
+        <span class="chip" onclick="this.classList.toggle('on')">Consulting</span>
+        <span class="chip" onclick="this.classList.toggle('on')">Advisory</span>
+        <span class="chip" onclick="this.classList.toggle('on')">Media</span>
+        <span class="chip" onclick="this.classList.toggle('on')">Employment</span>
+        <span class="chip" onclick="this.classList.toggle('on')">Other</span>
+      </div>
+    </div>
+    <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell me about your project or inquiry..."></textarea></div>
+    <button class="btn-submit">Send Message</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-name">Charles J. DiRocco</div>
+  <div class="footer-desigs">CRE · CCIM · FRICS · MBA · Denver, CO</div>
+  <div class="footer-copy">© 2026 Charles DiRocco. All rights reserved.</div>
+</footer>
+
+<script>
+  // Nav active
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    document.querySelectorAll('section[id]').forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+  });
+
+  // Reveal
+  const ro = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  // Rotator
+  const slides = document.querySelectorAll('.rotator-slide');
+  const dots = document.querySelectorAll('.rdot');
+  let current = 0, timer;
+
+  function goSlide(n) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    clearInterval(timer);
+    timer = setInterval(nextSlide, 6000);
+  }
+  function nextSlide() { goSlide((current + 1) % slides.length); }
+  timer = setInterval(nextSlide, 6000);
+
+  // Pub filter
+  document.getElementById('pubFilter').addEventListener('click', e => {
+    if (!e.target.matches('.filter-btn')) return;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    const f = e.target.dataset.filter;
+    document.querySelectorAll('.pub-item').forEach(item => {
+      item.style.display = (f === 'all' || item.dataset.type === f) ? 'grid' : 'none';
+    });
+  });
+</script>
+</body>
+</html>
