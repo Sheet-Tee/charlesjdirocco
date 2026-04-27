@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chuck DiRocco | Research Executive · Thought Leader · Public Speaker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold:#C4A44A;--gold-dim:#8A6F30;--white:#FFFFFF;--off-white:#F0F0F0;
+    --grey-1:#E0E0E0;--grey-2:#A0A0A0;--grey-3:#606060;
+    --charcoal:#1E1E1E;--charcoal2:#252525;--charcoal3:#2E2E2E;
+    --rule-w:rgba(255,255,255,0.08);--rule-g:rgba(196,164,74,0.2);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--charcoal);color:var(--off-white);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 5rem;background:rgba(30,30,30,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--rule-w);}
+  .nav-logo{font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--white);text-decoration:none;}
+  .nav-logo span{color:var(--gold);}
+  .nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center;}
+  .nav-links a{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey-2);text-decoration:none;transition:color 0.2s;padding-bottom:2px;border-bottom:1px solid transparent;}
+  .nav-links a:hover{color:var(--white);}
+  .nav-links a.active{color:var(--gold);border-bottom-color:var(--gold);}
+  .nav-cta{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--charcoal);background:var(--gold);padding:0.55rem 1.2rem;text-decoration:none;transition:background 0.2s;}
+  .nav-cta:hover{background:#d4b45a;}
+  .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:200;}
+  .hamburger span{display:block;width:24px;height:2px;background:var(--white);transition:all 0.3s ease;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(30,30,30,0.98);backdrop-filter:blur(16px);border-bottom:1px solid var(--rule-w);flex-direction:column;padding:1.5rem 2rem;z-index:99;}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey-1);text-decoration:none;padding:1rem 0;border-bottom:1px solid var(--rule-w);transition:color 0.2s;}
+  .mobile-menu a:last-child{border-bottom:none;}
+  .mobile-menu a:hover{color:var(--gold);}
+  .mobile-cta{margin-top:1rem;background:var(--gold)!important;color:var(--charcoal)!important;text-align:center;padding:0.9rem!important;border:none!important;font-weight:500;}
+
+  /* HERO */
+  #hero{min-height:100vh;display:grid;grid-template-columns:0.55fr 1.45fr;padding-top:64px;}
+  .hero-photo-side{position:relative;overflow:hidden;background:var(--charcoal2);display:flex;align-items:center;justify-content:center;padding:3rem 2rem;}
+  .hero-photo-side img{width:100%;max-width:260px;height:auto;display:block;filter:grayscale(15%) contrast(1.05);box-shadow:0 20px 50px rgba(0,0,0,0.4);}
+  .hero-content-side{display:flex;flex-direction:column;justify-content:center;padding:4rem 5rem 4rem 4rem;}
+  .hero-eyebrow{font-family:'DM Mono',monospace;font-size:0.62rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;}
+  .hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold);}
+  .hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,4.5vw,4rem);font-weight:700;line-height:1.05;color:var(--white);margin-bottom:1rem;}
+  .hero-title em{font-style:italic;color:var(--gold);font-weight:400;}
+
+  /* ROTATOR */
+  .hero-rotator{margin:2.5rem 0 1.5rem;height:175px;position:relative;border-left:2px solid var(--gold);overflow:hidden;}
+  .rotator-slide{position:absolute;top:0;left:0;right:0;opacity:0;transform:translateY(14px);transition:opacity 0.6s ease,transform 0.6s ease;padding-left:1.8rem;}
+  .rotator-slide.active{opacity:1;transform:translateY(0);}
+  .slide-stat{font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:700;color:var(--gold);line-height:1;margin-bottom:0.5rem;}
+  .slide-label{font-size:0.88rem;color:var(--grey-1);line-height:1.6;max-width:340px;}
+  .slide-label strong{color:var(--white);font-weight:600;}
+  .rotator-dots{display:flex;gap:0.5rem;margin-bottom:2.5rem;padding-left:1.8rem;}
+  .rdot{width:20px;height:2px;background:var(--grey-3);cursor:pointer;transition:background 0.2s,width 0.3s;}
+  .rdot.active{background:var(--gold);width:36px;}
+
+  .hero-designations{display:flex;gap:0.6rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+  .desig{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;color:var(--grey-2);border:1px solid var(--rule-w);padding:0.3rem 0.75rem;transition:border-color 0.2s,color 0.2s;}
+  .desig:hover{border-color:var(--gold);color:var(--gold);}
+  .hero-actions{display:flex;gap:1rem;}
+  .btn-gold{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--gold);color:var(--charcoal);padding:0.9rem 1.8rem;text-decoration:none;font-weight:500;transition:background 0.2s,transform 0.15s;display:inline-block;}
+  .btn-gold:hover{background:#d4b45a;transform:translateY(-1px);}
+  .btn-outline{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;background:transparent;color:var(--grey-1);padding:0.9rem 1.8rem;text-decoration:none;border:1px solid var(--rule-w);transition:border-color 0.2s,color 0.2s;display:inline-block;}
+  .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* TICKER */
+  .ticker{background:var(--gold);padding:0.7rem 0;overflow:hidden;white-space:nowrap;}
+  .ticker-track{display:inline-flex;animation:ticker-loop 35s linear infinite;}
+  .ticker-segment{display:inline-flex;}
+  .ticker-item{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--charcoal);font-weight:500;padding:0 2.5rem;}
+  .ticker-item::before{content:'◆';margin-right:2.5rem;opacity:0.4;}
+  @keyframes ticker-loop{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+  /* SECTIONS */
+  section{padding:7rem 5rem;}
+  .section-label{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+  .section-num{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--gold);letter-spacing:0.15em;}
+  .section-line{flex:0 0 32px;height:1px;background:var(--gold);}
+  .section-tag{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--grey-3);}
+  h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,3vw,2.8rem);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:3.5rem;}
+  h2 em{font-style:italic;color:var(--gold);font-weight:400;}
+
+  /* ABOUT */
+  #about{background:var(--charcoal2);}
+  .about-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:6rem;align-items:start;}
+  .about-body p{font-size:1rem;line-height:1.85;color:var(--grey-1);margin-bottom:1.4rem;}
+  .about-body p strong{color:var(--white);font-weight:600;}
+  .expertise-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule-w);margin-top:3rem;}
+  .exp-item{padding:0.9rem 1.2rem;border-bottom:1px solid var(--rule-w);border-right:1px solid var(--rule-w);font-size:0.78rem;color:var(--grey-2);display:flex;align-items:center;gap:0.6rem;}
+  .exp-item:nth-child(2n){border-right:none;}
+  .exp-item:nth-last-child(-n+2){border-bottom:none;}
+  .exp-dot{width:3px;height:3px;background:var(--gold);border-radius:50%;flex-shrink:0;}
+  .timeline{margin-top:4rem;border-top:1px solid var(--rule-w);}
+  .tl-item{padding:1.6rem 0;border-bottom:1px solid var(--rule-w);}
+  .tl-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.4rem;flex-wrap:wrap;}
+  .tl-org{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);}
+  .tl-dates{font-family:'DM Mono',monospace;font-size:0.56rem;color:var(--grey-3);}
+  .tl-role{font-size:0.95rem;font-weight:500;color:var(--white);margin-bottom:0.35rem;}
+  .tl-desc{font-size:0.82rem;color:var(--grey-2);line-height:1.6;}
+
+  /* IN THE FIELD */
+  #speaking{background:var(--charcoal);}
+  .speaking-intro{max-width:680px;font-size:1rem;color:var(--grey-2);line-height:1.8;margin-bottom:3rem;}
+
+  /* Video grid — 3 cards same size */
+  .video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--rule-w);margin-bottom:2px;}
+  .video-card{position:relative;overflow:hidden;background:var(--charcoal3);cursor:pointer;}
+  .video-card-thumb{aspect-ratio:4/3;position:relative;overflow:hidden;}
+  .video-card-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform 0.5s ease;}
+  .video-card:hover .video-card-thumb img{transform:scale(1.04);}
+  .video-play-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.6rem;transition:background 0.2s;}
+  .video-card:hover .video-play-overlay{background:rgba(0,0,0,0.45);}
+  .play-circle{width:52px;height:52px;border-radius:50%;background:rgba(196,164,74,0.15);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .play-circle::after{content:'';border-width:7px 0 7px 13px;border-style:solid;border-color:transparent transparent transparent var(--gold);margin-left:4px;}
+  .video-card-label{font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);}
+  .video-iframe{position:absolute;inset:0;width:100%;height:100%;border:none;display:none;z-index:10;}
+
+  /* Topic list under each video card */
+  .video-card-info{padding:1.5rem 1.6rem;background:var(--charcoal2);border-top:1px solid var(--rule-w);}
+  .video-card-title{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--white);margin-bottom:0.8rem;line-height:1.3;}
+  .video-card-topics{list-style:none;display:flex;flex-direction:column;gap:0.5rem;}
+  .video-card-topics li{font-size:0.85rem;color:var(--grey-1);display:flex;align-items:center;gap:0.5rem;}
+  .video-card-topics li::before{content:'';width:3px;height:3px;background:var(--gold);border-radius:50%;flex-shrink:0;}
+
+  /* PHOTO SLIDESHOW */
+  .slideshow{background:var(--charcoal);padding:4rem 5rem;border-top:1px solid var(--rule-w);margin-top:2px;}
+  .slideshow-label{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--grey-3);margin-bottom:1.5rem;}
+  .slideshow-stage{position:relative;width:100%;aspect-ratio:16/7;overflow:hidden;background:var(--charcoal3);}
+  .slide-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 0.8s ease;}
+  .slide-img.active{opacity:1;}
+  .slide-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(196,164,74,0.15);border:1px solid var(--gold);color:var(--gold);font-size:2rem;width:48px;height:48px;cursor:pointer;z-index:10;transition:background 0.2s;display:flex;align-items:center;justify-content:center;line-height:1;}
+  .slide-btn:hover{background:rgba(196,164,74,0.35);}
+  .slide-prev{left:1rem;}
+  .slide-next{right:1rem;}
+  .slide-dots{display:flex;justify-content:center;gap:0.5rem;margin-top:1.2rem;}
+  .slide-dot{width:24px;height:2px;background:var(--grey-3);cursor:pointer;transition:background 0.2s,width 0.3s;border:none;}
+  .slide-dot.active{background:var(--gold);width:36px;}
+
+  /* PUBLICATIONS */
+  #publications{background:var(--charcoal2);}
+  .pub-list{display:flex;flex-direction:column;border-top:1px solid var(--rule-w);}
+  .pub-item{display:flex;flex-direction:column;gap:0.3rem;padding:1.5rem 0;border-bottom:1px solid var(--rule-w);transition:background 0.15s,padding 0.15s;cursor:pointer;}
+  .pub-item:hover{background:rgba(196,164,74,0.04);padding-left:0.8rem;padding-right:0.8rem;}
+  .pub-meta{display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;margin-bottom:0.3rem;}
+  .pub-year{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--gold);letter-spacing:0.08em;}
+  .pub-source{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey-3);}
+  .pub-tag{font-family:'DM Mono',monospace;font-size:0.52rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey-3);border:1px solid var(--rule-w);padding:0.2rem 0.55rem;}
+  .pub-tag.link{color:var(--gold);border-color:var(--rule-g);}
+  .pub-title-text{font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);line-height:1.3;}
+
+  /* CONTACT */
+  #contact{background:var(--charcoal2);display:grid;grid-template-columns:1fr 1fr;padding:0;}
+  .contact-left{padding:7rem 4rem 7rem 5rem;border-right:1px solid var(--rule-w);}
+  .contact-right{padding:7rem 5rem 7rem 4rem;}
+  .contact-left h2{color:var(--white);margin-bottom:1.5rem;}
+  .contact-desc{font-size:0.95rem;color:var(--grey-2);line-height:1.8;margin-bottom:2.5rem;}
+  .contact-list{display:flex;flex-direction:column;gap:0.8rem;margin-bottom:3rem;}
+  .contact-list-item{display:flex;align-items:center;gap:0.8rem;font-size:0.9rem;color:var(--grey-2);}
+  .contact-list-item::before{content:'';width:4px;height:4px;background:var(--gold);border-radius:50%;flex-shrink:0;}
+  .contact-detail{display:flex;flex-direction:column;gap:0.15rem;margin-bottom:1.2rem;}
+  .contact-detail-label{font-family:'DM Mono',monospace;font-size:0.52rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);}
+  .contact-detail-value{font-size:0.9rem;color:var(--white);text-decoration:none;}
+  .contact-detail-value:hover{color:var(--gold);}
+  .form-heading{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--white);margin-bottom:2rem;}
+  .form-group{margin-bottom:1.3rem;}
+  .form-label{display:block;font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--grey-3);margin-bottom:0.45rem;}
+  .form-input,.form-textarea{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--rule-w);color:var(--white);font-family:'Inter',sans-serif;font-size:0.9rem;padding:0.8rem 1rem;outline:none;transition:border-color 0.2s;}
+  .form-input::placeholder,.form-textarea::placeholder{color:var(--grey-3);}
+  .form-input:focus,.form-textarea:focus{border-color:var(--gold);}
+  .form-textarea{min-height:110px;resize:vertical;}
+  .form-chips{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.3rem;}
+  .chip{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.08em;text-transform:uppercase;border:1px solid var(--rule-w);color:var(--grey-3);padding:0.38rem 0.85rem;cursor:pointer;transition:all 0.2s;user-select:none;}
+  .chip.on{background:var(--gold);color:var(--charcoal);border-color:var(--gold);font-weight:500;}
+  .btn-submit{width:100%;background:var(--gold);color:var(--charcoal);font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.13em;text-transform:uppercase;padding:1rem;border:none;cursor:pointer;font-weight:500;transition:background 0.2s,transform 0.15s;}
+  .btn-submit:hover{background:#d4b45a;transform:translateY(-1px);}
+
+  /* FOOTER */
+  footer{background:#161616;border-top:1px solid var(--rule-w);padding:2rem 5rem;display:flex;align-items:center;justify-content:space-between;}
+  .footer-name{font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:500;color:var(--grey-2);}
+  .footer-desigs{font-family:'DM Mono',monospace;font-size:0.52rem;color:var(--grey-3);letter-spacing:0.1em;}
+  .footer-copy{font-family:'DM Mono',monospace;font-size:0.5rem;color:var(--grey-3);opacity:0.5;}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease;}
+  .reveal.visible{opacity:1;transform:none;}
+  .d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.32s;}.d4{transition-delay:0.45s;}
+
+  ::-webkit-scrollbar{width:3px;}
+  ::-webkit-scrollbar-track{background:var(--charcoal);}
+  ::-webkit-scrollbar-thumb{background:var(--gold-dim);}
+
+  /* MOBILE */
+  @media(max-width:900px){
+    nav{padding:1rem 1.5rem;}
+    .nav-links,.nav-cta{display:none;}
+    .hamburger{display:flex;}
+    #hero{grid-template-columns:1fr;min-height:auto;}
+    .hero-photo-side{height:280px;padding:2rem;}
+    .hero-photo-side img{max-width:180px;}
+    .hero-content-side{padding:2.5rem 1.5rem;}
+    .hero-rotator{height:150px;}
+    .slide-stat{font-size:2.4rem;}
+    section{padding:4rem 1.5rem;}
+    .about-grid{grid-template-columns:1fr;gap:2rem;}
+    .expertise-grid{grid-template-columns:1fr;}
+    .video-grid{grid-template-columns:1fr;}
+    #contact{grid-template-columns:1fr;}
+    .contact-left{padding:4rem 1.5rem 2rem;border-right:none;border-bottom:1px solid var(--rule-w);}
+    .contact-right{padding:2rem 1.5rem 4rem;}
+    footer{flex-direction:column;gap:0.6rem;text-align:center;padding:1.5rem;}
+    .slideshow{padding:3rem 1.5rem;}
+  }
+
+  .now-playing-label{font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;}
+  .san-antonio-img{object-position:center 20%!important;}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a class="nav-logo" href="#">Chuck <span>DiRocco</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#speaking">On Stage</a></li>
+    <li><a href="#publications">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#speaking" onclick="closeMenu()">On Stage</a>
+  <a href="#publications" onclick="closeMenu()">Research</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="#contact" class="mobile-cta" onclick="closeMenu()">Get in Touch</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-photo-side">
+    <img src="images/headshot.png" alt="Chuck DiRocco">
+  </div>
+  <div class="hero-content-side">
+    <div class="hero-eyebrow reveal">Chuck DiRocco</div>
+    <h1 class="hero-title reveal d1">Research Executive<br>Thought <em>Leader</em><br>Public Speaker</h1>
+    <div class="hero-rotator reveal d2">
+      <div class="rotator-slide active">
+        <div class="slide-stat">25+</div>
+        <div class="slide-label">Years building <strong>institutional thought leadership</strong> that translates complex economic analysis into content executives, investors, and advisors actually use.</div>
+      </div>
+      <div class="rotator-slide">
+        <div class="slide-stat">#1</div>
+        <div class="slide-label">Co-creator of the globally adopted benchmark for REIT investment — the <strong>FTSE/EPRA/NAREIT Global Real Estate Index</strong>, now licensed throughout the industry worldwide.</div>
+      </div>
+      <div class="rotator-slide">
+        <div class="slide-stat">12+</div>
+        <div class="slide-label">Years leading <strong>Emerging Trends in Real Estate®</strong> — PwC's #2 most-clicked global publication, reaching institutional investors worldwide.</div>
+      </div>
+      <div class="rotator-slide">
+        <div class="slide-stat">100+</div>
+        <div class="slide-label">Keynotes and panels at national conferences — translating complex economic data into decisions for <strong>institutional audiences</strong>.</div>
+      </div>
+    </div>
+    <div class="rotator-dots reveal d2">
+      <div class="rdot active" onclick="goSlide(0)"></div>
+      <div class="rdot" onclick="goSlide(1)"></div>
+      <div class="rdot" onclick="goSlide(2)"></div>
+      <div class="rdot" onclick="goSlide(3)"></div>
+    </div>
+    <div class="hero-designations reveal d3">
+      <span class="desig">CRE</span>
+      <span class="desig">CCIM</span>
+      <span class="desig">FRICS</span>
+      <span class="desig">MBA · Finance</span>
+    </div>
+    <div class="hero-actions reveal d4">
+      <a href="#contact" class="btn-gold">Inquire About Engagements</a>
+      <a href="#publications" class="btn-outline">View Research</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-segment">
+      <span class="ticker-item">Research Executive</span><span class="ticker-item">Economist</span><span class="ticker-item">Keynote Speaker</span><span class="ticker-item">Index Architect</span><span class="ticker-item">Thought Leader</span><span class="ticker-item">Investor Educator</span><span class="ticker-item">Financial Markets</span><span class="ticker-item">Capital Markets</span>
+    </div>
+    <div class="ticker-segment">
+      <span class="ticker-item">Research Executive</span><span class="ticker-item">Economist</span><span class="ticker-item">Keynote Speaker</span><span class="ticker-item">Index Architect</span><span class="ticker-item">Thought Leader</span><span class="ticker-item">Investor Educator</span><span class="ticker-item">Financial Markets</span><span class="ticker-item">Capital Markets</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label"><span class="section-num">01</span><div class="section-line"></div><span class="section-tag">Background</span></div>
+  <div class="about-grid">
+    <div class="reveal">
+      <h2>Research <em>Executive</em><br>& Economist</h2>
+      <div class="expertise-grid">
+        <div class="exp-item"><span class="exp-dot"></span>Economic & Market Analysis</div>
+        <div class="exp-item"><span class="exp-dot"></span>Thought Leadership Publishing</div>
+        <div class="exp-item"><span class="exp-dot"></span>Investor Education</div>
+        <div class="exp-item"><span class="exp-dot"></span>Index Construction</div>
+        <div class="exp-item"><span class="exp-dot"></span>Keynote Speaking</div>
+        <div class="exp-item"><span class="exp-dot"></span>Survey Research</div>
+        <div class="exp-item"><span class="exp-dot"></span>Team & Budget Leadership</div>
+        <div class="exp-item"><span class="exp-dot"></span>Media Spokesperson</div>
+        <div class="exp-item"><span class="exp-dot"></span>Capital Markets</div>
+        <div class="exp-item"><span class="exp-dot"></span>Portfolio Strategy</div>
+      </div>
+    </div>
+    <div class="about-body reveal d2">
+      <p>I am a <strong>research executive and economist</strong> with a career built at the intersection of rigorous methodology, investor education, and high-visibility communication. My fluency spans macro and microeconomic dynamics — monetary policy, labor markets, inflation, capital flows, and debt and equity market cycles — and how those forces translate into real investment behavior and outcomes.</p>
+      <p>At <strong>PwC</strong>, I lead the full research lifecycle for <em>Emerging Trends in Real Estate®</em>, the firm's #2 most-clicked global publication. As <strong>Managing Director at Ankura</strong>, I led institutional economic research serving investment banks, insurers, and pension fund managers. Earlier at <strong>NAREIT</strong>, I produced the landmark Ibbotson/NAREIT REIT Asset Allocation Study and co-architected the <strong>FTSE/EPRA/NAREIT Global Real Estate Index</strong> — the globally adopted benchmark for institutional real estate allocation.</p>
+      <p>I have published in peer-reviewed journals, contributed to <em>Forbes</em>, and authored original research on <strong>probability markets and asset valuation</strong>. I know how to tailor the same underlying research for a CFO, a financial advisor, and an individual investor.</p>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-header"><span class="tl-org">PwC</span><span class="tl-dates">2022–Present · 2008–2013</span></div><div class="tl-role">Director of Research</div><div class="tl-desc">Leads Emerging Trends in Real Estate® globally. Keynote presenter at major industry conferences. AI-integrated analytics and data visualization.</div></div>
+        <div class="tl-item"><div class="tl-header"><span class="tl-org">Ankura</span><span class="tl-dates">2019–2022</span></div><div class="tl-role">Managing Director, Research & Insights</div><div class="tl-desc">Led institutional economic research programs serving investment banks, insurers, and pension fund managers.</div></div>
+        <div class="tl-item"><div class="tl-header"><span class="tl-org">Altus Group</span><span class="tl-dates">2013–2018</span></div><div class="tl-role">Director of Research</div><div class="tl-desc">Designed Real Confidence Executive Survey and The Yardstick quarterly forecast. Primary media spokesperson.</div></div>
+        <div class="tl-item"><div class="tl-header"><span class="tl-org">ULI</span><span class="tl-dates">2006–2008</span></div><div class="tl-role">Managing Director, Industry Trends & Analysis</div><div class="tl-desc">Owned editorial governance of ETRE across three global editions. Redesigned global survey instruments.</div></div>
+        <div class="tl-item"><div class="tl-header"><span class="tl-org">NAREIT</span><span class="tl-dates">1995–2005</span></div><div class="tl-role">VP, Research & Investor Education</div><div class="tl-desc">Produced the landmark Ibbotson/NAREIT Asset Allocation Study. Architected the FTSE/EPRA/NAREIT Global Real Estate Index. Led national investor education for Fortune 500 plan sponsors.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IN THE FIELD -->
+<section id="speaking">
+  <div class="section-label"><span class="section-num">02</span><div class="section-line"></div><span class="section-tag">On Stage</span></div>
+  <h2 class="reveal">In the <em>Field</em></h2>
+  <p class="speaking-intro reveal d1">A national public speaker with two decades of experience at major industry events — combining rigorous economic analysis with memorable storytelling, from major conference keynotes to boardroom briefings for institutional investors.</p>
+
+  <!-- 3 video cards -->
+  <div class="video-grid reveal d1">
+
+    <!-- Card 1: ETRE Fall Meeting -->
+    <div class="video-card" id="v1Wrap" onclick="playVid('v1Wrap','v1Frame')">
+      <div class="video-card-thumb">
+        <img src="images/etre-fall-2026.jpg" alt="2026 ETRE Fall Meeting">
+        <div class="video-play-overlay">
+          <div class="play-circle"></div>
+          <div class="video-card-label">2026 ETRE Fall Meeting</div>
+        </div>
+        <iframe id="v1Frame" class="video-iframe" src=""
+          data-src="https://www.youtube.com/embed/jkVkQxgLBKs?rel=0&modestbranding=1&autoplay=1"
+          title="2026 ETRE Fall Meeting" frameborder="0"
+          allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="video-card-info">
+        <div class="video-card-title">Emerging Trends in Real Estate® — Fall Meeting 2026</div>
+        <ul class="video-card-topics">
+          <li>Top 10 Emerging Trends</li>
+          <li>Domestic Migration Shifts</li>
+          <li>Essential Real Estate & Operational Efficiency</li>
+          <li>Capital Markets Outlook</li>
+          <li>AI & Data Centers</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Card 2: San Antonio -->
+    <div class="video-card" id="v2Wrap" onclick="playVid('v2Wrap','v2Frame')">
+      <div class="video-card-thumb">
+        <img src="images/speaking-san-antonio.jpg" alt="ETRE San Antonio 2026" class="san-antonio-img">
+        <div class="video-play-overlay">
+          <div class="play-circle"></div>
+          <div class="video-card-label">ETRE San Antonio 2026</div>
+        </div>
+        <iframe id="v2Frame" class="video-iframe" src=""
+          data-src="https://www.youtube.com/embed/CatCW5ePq2I?rel=0&modestbranding=1&autoplay=1"
+          title="ETRE San Antonio 2026" frameborder="0"
+          allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="video-card-info">
+        <div class="video-card-title">Emerging Trends in Real Estate® — San Antonio 2026</div>
+        <ul class="video-card-topics">
+          <li>Immigration & Migration Trends</li>
+          <li>Natural Disasters & Insurance Costs</li>
+          <li>Housing Affordability</li>
+          <li>Markets to Watch</li>
+          <li>Economic Outlook: San Antonio</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Card 3: CRE Podcast — thumbnail stays visible while playing -->
+    <div class="video-card" id="v3Wrap" onclick="playPodcast()">
+      <div class="video-card-thumb">
+        <img src="images/podcast-thumbnail.jpg" alt="Counselors of Real Estate Podcast">
+        <div class="video-play-overlay" id="v3Overlay">
+          <div class="play-circle" id="v3PlayCircle"></div>
+          <div class="video-card-label">CRE Podcast · January 2026</div>
+        </div>
+        <!-- Audio only — thumbnail stays on top -->
+        <div id="v3AudioWrap" style="display:none;position:absolute;bottom:0;left:0;right:0;z-index:4;background:rgba(0,0,0,0.7);padding:0.6rem 1rem;">
+          <div class="now-playing-label">▶ Now Playing</div>
+          <iframe id="v3Frame" src="" data-src="https://www.youtube.com/embed/wOY5dmIZWIw?rel=0&modestbranding=1&autoplay=1"
+            title="Counselors of Real Estate Podcast" frameborder="0"
+            allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+            style="width:100%;height:60px;border:none;"></iframe>
+        </div>
+      </div>
+      <div class="video-card-info">
+        <div class="video-card-title">Counselors of Real Estate® — Economic Outlook Podcast</div>
+        <ul class="video-card-topics">
+          <li>Economic Outlook · January 2026</li>
+          <li>Market Trends & Forecasting</li>
+          <li>Institutional Investment Strategy</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PHOTO SLIDESHOW -->
+  <div class="slideshow reveal" id="slideshow">
+    <div class="slideshow-label">From the Archive</div>
+    <div class="slideshow-stage">
+      <img class="slide-img active" src="images/film-1.jpg" alt="Speaking">
+      <img class="slide-img" src="images/film-2.jpg" alt="San Antonio">
+      <img class="slide-img" src="images/film-3.jpg" alt="Speaking">
+      <img class="slide-img" src="images/film-4.jpg" alt="CEO TV">
+      <img class="slide-img" src="images/film-5.jpg" alt="Award">
+      <img class="slide-img" src="images/film-6.jpg" alt="Georgia">
+      <img class="slide-img" src="images/film-7.jpg" alt="International">
+      <button class="slide-btn slide-prev" onclick="slideNav(-1)">&#8249;</button>
+      <button class="slide-btn slide-next" onclick="slideNav(1)">&#8250;</button>
+    </div>
+    <div class="slide-dots" id="slideDots"></div>
+  </div>
+
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-label"><span class="section-num">03</span><div class="section-line"></div><span class="section-tag">Research & Publications</span></div>
+  <h2 class="reveal">Selected <em>Works</em></h2>
+  <div class="pub-list reveal d1">
+    <div class="pub-item" onclick="window.open('https://www.linkedin.com/pulse/cre-wisdom-crowds-contracts-can-prediction-markets-chuck-tezzc/','_blank')">
+      <div class="pub-meta"><span class="pub-year">2025</span><span class="pub-source">PwC / LinkedIn</span><span class="pub-tag">Paper</span><span class="pub-tag link">↗ Read</span></div>
+      <div class="pub-title-text">CRE Wisdom: Crowds, Contracts & Prediction Markets — Can They Improve Real Estate Decisions?</div>
+    </div>
+    <div class="pub-item" onclick="window.open('https://www.pwc.com/us/en/industries/financial-services/asset-wealth-management/real-estate/emerging-trends-in-real-estate-pwc-uli.html','_blank')">
+      <div class="pub-meta"><span class="pub-year">2008–2026</span><span class="pub-source">PwC / Urban Land Institute</span><span class="pub-tag">Report</span><span class="pub-tag link">↗ Read</span></div>
+      <div class="pub-title-text">Emerging Trends in Real Estate® — North America, Europe & Asia Pacific (Annual)</div>
+    </div>
+    <div class="pub-item" onclick="window.open('articles/listed-infrastructure-portfolio-diversification.pdf','_blank')">
+      <div class="pub-meta"><span class="pub-year">2025</span><span class="pub-source">GLIO Journal, Issue 16</span><span class="pub-tag">Report</span><span class="pub-tag link">↗ PDF</span></div>
+      <div class="pub-title-text">Adding Listed Infrastructure to the Mix — Portfolio Diversification for Institutional Investors</div>
+    </div>
+    <div class="pub-item" onclick="window.open('https://www.forbes.com/sites/bisnow/2017/01/18/experts-bet-on-infrastructure-as-one-of-the-highest-yield-property-asset-classes-this-year/','_blank')">
+      <div class="pub-meta"><span class="pub-year">2017</span><span class="pub-source">Forbes</span><span class="pub-tag">Article</span><span class="pub-tag link">↗ Read</span></div>
+      <div class="pub-title-text">Experts Bet on Infrastructure as One of the Highest-Yield Property Asset Classes</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-meta"><span class="pub-year">2021</span><span class="pub-source">American Bar Association</span><span class="pub-tag">Article</span></div>
+      <div class="pub-title-text">The Complex Art of Valuing Commercial Real Estate During a Pandemic and Cyclical Downturns</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-meta"><span class="pub-year">2011</span><span class="pub-source">American Real Estate Society</span><span class="pub-tag">Paper</span></div>
+      <div class="pub-title-text">New Evidence on the Diversification Benefits of Real Estate</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-meta"><span class="pub-year">2006</span><span class="pub-source">Journal of Real Estate Finance and Economics, Vol. 33</span><span class="pub-tag">Paper</span></div>
+      <div class="pub-title-text">Equity Capital Flows and Demand for REITs — Peer-Reviewed Study</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-meta"><span class="pub-year">2002</span><span class="pub-source">Ibbotson Associates / NAREIT</span><span class="pub-tag">Paper</span></div>
+      <div class="pub-title-text">REIT Asset Allocation Study — Landmark Research for Institutional Portfolio Construction</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-meta"><span class="pub-year">2000</span><span class="pub-source">AAII Journal — Co-authored</span><span class="pub-tag">Paper</span></div>
+      <div class="pub-title-text">Investing in Real Estate Investment Trusts — Foundational Guide for Individual Investors</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-left">
+    <div class="section-label" style="margin-bottom:1rem"><span class="section-num" style="color:var(--gold)">04</span><div class="section-line"></div><span class="section-tag">Get in Touch</span></div>
+    <h2>Let's <em>Connect</em></h2>
+    <p class="contact-desc">Available for speaking engagements, consulting, board advisory, media commentary, and executive collaboration. Based in Denver, CO — available nationally and globally.</p>
+    <div class="contact-list">
+      <div class="contact-list-item">Speaking Engagements & Keynotes</div>
+      <div class="contact-list-item">Research Consulting & Partnerships</div>
+      <div class="contact-list-item">Board & Advisory Roles</div>
+      <div class="contact-list-item">Media & Editorial Commentary</div>
+      <div class="contact-list-item">Executive & Leadership Opportunities</div>
+    </div>
+    <div class="contact-detail"><span class="contact-detail-label">Email</span><a href="mailto:cjdirocco@yahoo.com" class="contact-detail-value">cjdirocco@yahoo.com</a></div>
+    <div class="contact-detail"><span class="contact-detail-label">LinkedIn</span><a href="https://linkedin.com/in/charlesdirocco" class="contact-detail-value">linkedin.com/in/charlesdirocco</a></div>
+    <div class="contact-detail"><span class="contact-detail-label">Location</span><span class="contact-detail-value">Denver, Colorado</span></div>
+  </div>
+  <div class="contact-right">
+    <p class="form-heading">Send a Message</p>
+    <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="Full name"></div>
+    <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="you@organization.com"></div>
+    <div class="form-group">
+      <label class="form-label">I'm Interested In</label>
+      <div class="form-chips">
+        <span class="chip" onclick="this.classList.toggle('on')">Speaking</span>
+        <span class="chip" onclick="this.classList.toggle('on')">Consulting</span>
+        <span class="chip" onclick="this.classList.toggle('on')">Advisory</span>
+        <span class="chip" onclick="this.classList.toggle('on')">Media</span>
+        <span class="chip" onclick="this.classList.toggle('on')">Employment</span>
+        <span class="chip" onclick="this.classList.toggle('on')">Other</span>
+      </div>
+    </div>
+    <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell me about your project or inquiry..."></textarea></div>
+    <button class="btn-submit">Send Message</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-name">Charles J. DiRocco</div>
+  <div class="footer-desigs">CRE · CCIM · FRICS · MBA · Denver, CO</div>
+  <div class="footer-copy">© 2026 Charles DiRocco. All rights reserved.</div>
+</footer>
+
+<script>
+  // Nav active
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    document.querySelectorAll('section[id]').forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+  });
+
+  // Reveal
+  const ro = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  // Rotator
+  const slides = document.querySelectorAll('.rotator-slide');
+  const dots = document.querySelectorAll('.rdot');
+  let cur = 0, timer;
+  function goSlide(n) {
+    slides[cur].classList.remove('active'); dots[cur].classList.remove('active');
+    cur = n;
+    slides[cur].classList.add('active'); dots[cur].classList.add('active');
+    clearInterval(timer); timer = setInterval(nextSlide, 6000);
+  }
+  function nextSlide() { goSlide((cur + 1) % slides.length); }
+  timer = setInterval(nextSlide, 6000);
+
+  // Video play
+  function playVid(wrapId, frameId) {
+    const wrap = document.getElementById(wrapId);
+    const frame = document.getElementById(frameId);
+    frame.src = frame.dataset.src;
+    frame.style.display = 'block';
+    wrap.querySelector('.video-play-overlay').style.display = 'none';
+    wrap.onclick = null;
+    wrap.style.cursor = 'default';
+  }
+
+  // Podcast — keep thumbnail, show audio bar
+  function playPodcast() {
+    const wrap = document.getElementById('v3Wrap');
+    const overlay = document.getElementById('v3Overlay');
+    const audioWrap = document.getElementById('v3AudioWrap');
+    const frame = document.getElementById('v3Frame');
+    frame.src = frame.dataset.src;
+    overlay.innerHTML = '<div style="font-family:'DM Mono',monospace;font-size:0.52rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);padding:0.5rem;">▶ Playing...</div>';
+    audioWrap.style.display = 'block';
+    wrap.onclick = null;
+    wrap.style.cursor = 'default';
+  }
+
+  // Slideshow
+  const slideImgs = document.querySelectorAll('.slide-img');
+  const dotsContainer = document.getElementById('slideDots');
+  let slideIdx = 0, slideTimer;
+
+  slideImgs.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'slide-dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goSlidePhoto(i);
+    dotsContainer.appendChild(d);
+  });
+
+  function goSlidePhoto(n) {
+    slideImgs[slideIdx].classList.remove('active');
+    dotsContainer.children[slideIdx].classList.remove('active');
+    slideIdx = (n + slideImgs.length) % slideImgs.length;
+    slideImgs[slideIdx].classList.add('active');
+    dotsContainer.children[slideIdx].classList.add('active');
+    clearInterval(slideTimer);
+    slideTimer = setInterval(() => goSlidePhoto(slideIdx + 1), 4000);
+  }
+  function slideNav(dir) { goSlidePhoto(slideIdx + dir); }
+  slideTimer = setInterval(() => goSlidePhoto(slideIdx + 1), 4000);
+
+  // Hamburger
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+  }
+</script>
+</body>
+</html>
